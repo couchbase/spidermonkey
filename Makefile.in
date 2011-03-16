@@ -484,8 +484,10 @@ jslock.o: jslock.cpp Makefile.in lock_sparcv8plus.il lock_sparcv9.il
 	@$(MAKE_DEPS_AUTO_CXX)
 ifeq (sparcv9,$(findstring sparcv9,$(OS_TEST)))
 	$(CXX) -o $@ -c $(COMPILE_CFLAGS) $(srcdir)/lock_sparcv9.il $<
-else
+else ifeq (sparcv8,$(findstring sparcv8,$(OS_TEST)))
 	$(CXX) -o $@ -c $(COMPILE_CFLAGS) $(srcdir)/lock_sparcv8plus.il $<
+else
+	$(CXX) -o $@ -c $(COMPILE_CFLAGS) $<
 endif # sparcv9
 endif # SOLARIS_SUNPRO_CXX
 
